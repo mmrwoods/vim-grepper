@@ -39,6 +39,9 @@ Execute (relative path, empty string):
 Execute (relative path, whitespace only):
   AssertEqual grepper#complete('  ', '', v:null), ['  ./foo/']
 
+Execute (relative path, leading word chars):
+  AssertEqual grepper#complete('f', '', v:null), ['./foo/']
+
 Execute (sub-path, ./ exact match):
   AssertEqual grepper#complete('./', '', v:null), ['./foo/']
 

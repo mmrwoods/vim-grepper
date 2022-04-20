@@ -242,7 +242,7 @@ function! grepper#complete_files(lead, _line, _pos)
   elseif path[0:1] ==# '~/'
     return map(split(globpath($HOME, path[2:].'*'), '\n'), 'head . "~" . v:val['.len($HOME).':] . (isdirectory(v:val) ? s:slash : "")')
   " handle relative paths
-  elseif empty(path) || (path =~ '\s$') || (path =~ '^\s*\w\+')
+  elseif empty(path) || (path =~ '\s$') || (path =~ '^\s*\w\+') || (path =~ '^\.\w\+')
     return map(
           \ map(split(globpath('.'.s:slash, path.'*'), '\n'), 'head . "." . v:val[1:] . (isdirectory(v:val) ? s:slash : "")'),
           \ "substitute(v:val, '^\\s*.'.s:slash, '', '')"

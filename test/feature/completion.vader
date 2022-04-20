@@ -51,6 +51,15 @@ Execute (relative path, whitespace only):
 Execute (relative path, leading word chars):
   AssertEqual grepper#complete('f', '', v:null), ['foo/']
 
+Execute (relative path, hidden files):
+  AssertEqual grepper#complete('.f', '', v:null), ['.foo']
+
+Execute (relative path, nested hidden dirs):
+  AssertEqual grepper#complete('foo/.b', '', v:null), ['foo/.bar/']
+
+Execute (relative path, nested hidden files):
+  AssertEqual grepper#complete('foo/bar/.b', '', v:null), ['foo/bar/.baz']
+
 Execute (sub-path, ./ exact match):
   AssertEqual grepper#complete('./', '', v:null), ['./foo/']
 

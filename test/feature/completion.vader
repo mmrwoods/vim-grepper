@@ -33,6 +33,15 @@ Execute (flags, -tool options):
   Assert len(grepper#complete('', 'Grepper -tool ', v:null)) > 1
   AssertEqual count(grepper#complete('', 'Grepper -tool ', v:null), 'grep '), 1
 
+Execute (path, tilde expansion):
+  AssertEqual grepper#complete('~', '', v:null), [$HOME]
+
+Execute (path, relative to $HOME):
+  let home = $HOME
+  let $HOME = getcwd()
+  AssertEqual grepper#complete('~/f', '', v:null), ['~/foo/']
+  let $HOME = home
+
 Execute (relative path, empty string):
   AssertEqual grepper#complete('', '', v:null), ['foo/']
 
